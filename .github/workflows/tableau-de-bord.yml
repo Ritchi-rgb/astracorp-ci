@@ -1,0 +1,26 @@
+name: Tableau de bord
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  qualite:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le code
+        uses: actions/checkout@v7
+
+      - name: Installer Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+          
+      - name: Installer ruff
+        run: pip install ruff==0.16.8
+
+      - name: Analyser le code
+        run: ruff check .
+
+      - name: Vérifier les calculs
+        run: python verifier.py
