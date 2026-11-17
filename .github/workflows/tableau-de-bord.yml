@@ -15,7 +15,7 @@ jobs:
         uses: actions/setup-python@v7
         with:
           python-version: "3.12"
-          
+
       - name: Installer ruff
         run: pip install ruff==0.16.8
 
@@ -24,3 +24,20 @@ jobs:
 
       - name: Vérifier les calculs
         run: python verifier.py
+        
+  rapport:
+    needs: qualite
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le code
+        uses: actions/checkout@v7
+
+      - name: Générer le rapport
+        run: python diagnostic.py . public
+
+      - name: Garder le rapport
+        uses: actions/upload-artifact@v7
+        with:
+          name: rapport
+          path: public/
+
