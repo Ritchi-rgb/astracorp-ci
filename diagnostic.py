@@ -27,8 +27,9 @@ def taille_lisible(octets):
     if octets < 1024:
         return f"{octets} o"
     elif octets < 1024 ** 2:
-        return f"{octets / 1024:.1f} Ko"
-    return f"{octets / 1024 ** 2:.1f} Mo"
+        #return f"{octets / 1024:.1f} Ko"
+        return f"{octets / 1000:.1f} Ko"
+    return f"{octets / 1024 ** 2:.1f} Mo"   
 
 
 def analyser(dossier, ignorer=()):
